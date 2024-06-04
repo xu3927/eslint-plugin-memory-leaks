@@ -1,26 +1,33 @@
 "use strict";
+const rule = require("../../../lib/rules/event-balance-binding");
+const eslintConfig = require('../../../.eslintrc')
+// import rule from '../../../lib/rules/event-balance-binding'
+// import RuleTester from 'eslint'
+// const RuleTester = require("eslint").RuleTester;
 
-const rule = require("../../../lib/rules/event-balance-binding"),
-    RuleTester = require("eslint").RuleTester;
-
-const ruleTester = new RuleTester({
+const ruleTester = new RuleTester.RuleTester({
+    // parser: require.resolve('@typescript-eslint/parser'),
+    parser: '@typescript-eslint/parser',
     parserOptions: {
-        ecmaVersion: 'latest', // 或你 .eslintrc 中指定的 ecmaVersion  
+        ecmaVersion: 'latest',
     },
+    plugins: ["@typescript-eslint"], 
     env: {
         browser: true,
         node: true,
         es6: true
     },
 });
+// const ruleTester = new RuleTester(eslintConfig)
 ruleTester.run("bind with unbind", rule, {
     valid: [
-        {
+        { 
             code: `
             // 正确示例 
-            // function EventEmitter {}
-            EventEmitter.prototype.on = () => {}
-            EventEmitter.prototype.off = () => {}
+            class EventEmitter {
+               on(){}
+               off(){}
+            };
             eventEmitter = new EventEmitter()
             handler = () => {}
             eventEmitter.on('show', handler)

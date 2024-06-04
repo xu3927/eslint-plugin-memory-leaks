@@ -1,6 +1,6 @@
 /**
- * @fileoverview remove-global-properties
- * @author remove-global-properties
+ * @fileoverview remove variables bind to global
+ * @author xu3927
  */
 "use strict";
 

@@ -7,9 +7,12 @@ module.exports = {
     "plugin:eslint-plugin/recommended",
     "plugin:node/recommended",
   ],
+  parser: require.resolve('@typescript-eslint/parser'),
   parserOptions: {
-    ecmaVersion: 'latest', // 设置为您希望支持的 ECMAScript 版本，例如 2018 或更高  
+    ecmaVersion: 'latest',
+    project: require.resolve("./tsconfig.json")
   }, 
+  plugins: ["@typescript-eslint"], 
   env: {
     "browser": true,
     "node": true,
